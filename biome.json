@@ -22,11 +22,7 @@
     "enabled": true,
     "rules": {
       "all": true,
-      "a11y": {
-        "noSvgWithoutTitle": "warn"
-      },
       "correctness": {
-        "noNodejsModules": "off",
         "useImportExtensions": "off"
       },
       "nursery": {
