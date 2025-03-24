@@ -2,7 +2,7 @@ import { DataTable } from "@/components/data-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ColumnDef } from "@tanstack/react-table";
-import { DataSokere } from "./data/data-sokere";
+import { DataSokere } from "../mock/api/data-sokere";
 
 export type Soker = {
   id: string;

@@ -20,9 +20,10 @@ import {
   User,
   Users,
 } from "lucide-react";
-import { type ReactNode, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router";
+import { Fragment, type ReactNode, useState } from "react";
+import { Link, NavLink, Outlet, href, useLocation } from "react-router";
 
+import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/ui/avatar";
 import {
   Breadcrumb,
@@ -103,10 +104,12 @@ function UserMenu({
             sideOffset={4}
           >
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <User />
-                Profil
-              </DropdownMenuItem>
+              <Link to={href("/dashboard/profile")} prefetch="intent">
+                <DropdownMenuItem>
+                  <User />
+                  Profil
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>
                 <Receipt />
                 Mine Utlegg
@@ -132,7 +135,7 @@ const mainLinks = [
     links: [
       {
         title: "Nye Søkere",
-        url: "/dashboard/intervjufordeling",
+        url: href("/dashboard/intervjufordeling"),
       },
       {
         title: "Tidligere Assistenter",
@@ -147,7 +150,7 @@ const mainLinks = [
         url: "#",
       },
       {
-        title: "Statestikk",
+        title: "Statistikk",
         url: "#",
       },
     ],
@@ -273,7 +276,7 @@ function NavLinks({
           return (
             <SidebarMenuItem key={link.title}>
               <SidebarMenuButton asChild>
-                <Link to={link.url}>
+                <Link to={link.url} prefetch="intent">
                   {link.icon}
                   <span>{link.title}</span>
                 </Link>
@@ -301,7 +304,7 @@ function NavLinks({
                   {link.links?.map((subLink) => (
                     <SidebarMenuSubItem key={subLink.title}>
                       <SidebarMenuSubButton asChild>
-                        <Link to={subLink.url}>
+                        <Link to={subLink.url} prefetch="intent">
                           <span>{subLink.title}</span>
                         </Link>
                       </SidebarMenuSubButton>
@@ -383,20 +386,27 @@ function Breadcrumbs() {
   const paths = pathname.split("/").filter((path) => path);
   const Paths = paths.map((path, index, arr) => {
     const fullPath = arr.slice(0, index + 1).join("/");
-    if (index !== paths.length - 1) {
-      return (
-        <div key={fullPath}>
-          <BreadcrumbItem key={fullPath} className="hidden md:block">
-            <Link to={fullPath}>{path}</Link>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator className="hidden md:block" />
-        </div>
-      );
-    }
+
+    const capitalizedPath = path.charAt(0).toUpperCase() + path.slice(1);
+
+    const isEnd = index === paths.length - 1;
+
     return (
-      <BreadcrumbItem key={fullPath} className="hidden md:block">
-        <Link to={fullPath}>{path}</Link>
-      </BreadcrumbItem>
+      <Fragment key={fullPath}>
+        <BreadcrumbItem>
+          <NavLink
+            to={`/${fullPath}`}
+            className={cn(
+              isEnd ? "text-black" : "text-gray-500",
+              "hover:text-black",
+            )}
+            prefetch="intent"
+          >
+            {capitalizedPath}
+          </NavLink>
+        </BreadcrumbItem>
+        {!isEnd && <BreadcrumbSeparator />}
+      </Fragment>
     );
   });
 
@@ -458,7 +468,7 @@ export default function Layout() {
                           size="sm"
                           tooltip={link.title}
                         >
-                          <Link to="#">
+                          <Link to={link.url} prefetch="intent">
                             {link.icon}
                             <span>{link.title}</span>
                           </Link>
