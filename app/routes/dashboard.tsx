@@ -131,17 +131,17 @@ function UserMenu({
 const mainLinks = [
   {
     title: "Opptak",
-    url: "#",
-    icon: <TrendingUp />,
+    url: href("/dashboard/sokere"),
+    icon: <TrendingUp size={16} />,
     isActive: false,
     links: [
       {
         title: "Nye Søkere",
-        url: href("/dashboard/intervjufordeling"),
+        url: href("/dashboard/sokere"),
       },
       {
         title: "Tidligere Assistenter",
-        url: "#",
+        url: href("/dashboard/tidligereassistenter"),
       },
       {
         title: "Intervjufordeling",
@@ -160,7 +160,7 @@ const mainLinks = [
   {
     title: "Assistenter",
     url: "#",
-    icon: <BookUser />,
+    icon: <BookUser size={16} />,
     isActive: false,
     links: [
       {
@@ -180,7 +180,7 @@ const mainLinks = [
   {
     title: "Brukere",
     url: "#",
-    icon: <Users />,
+    icon: <Users size={16} />,
     isActive: false,
     links: [
       {
@@ -198,7 +198,7 @@ const adminLinks = [
   {
     title: "Team",
     url: "#",
-    icon: <NotebookPen />,
+    icon: <NotebookPen size={16} />,
     isActive: false,
     links: [
       {
@@ -214,7 +214,7 @@ const adminLinks = [
   {
     title: "Økonomi",
     url: "#",
-    icon: <PiggyBank />,
+    icon: <PiggyBank size={16} />,
     isActive: false,
     links: [
       {
@@ -230,7 +230,7 @@ const adminLinks = [
   {
     title: "Annet",
     url: "#",
-    icon: <CircleEllipsis />,
+    icon: <CircleEllipsis size={16} />,
     isActive: false,
     links: [
       {
@@ -271,21 +271,11 @@ function NavLinks({
     }>;
   }>;
 }) {
+  const { open } = useSidebar();
+
   return (
     <SidebarMenu>
       {links.map((link) => {
-        if (!link.links) {
-          return (
-            <SidebarMenuItem key={link.title}>
-              <SidebarMenuButton asChild>
-                <Link to={link.url} prefetch="intent">
-                  {link.icon}
-                  <span>{link.title}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          );
-        }
         return (
           <Collapsible
             key={link.title}
@@ -296,8 +286,16 @@ function NavLinks({
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton tooltip={link.title}>
-                  {link.icon}
-                  <span>{link.title}</span>
+                  {open ? (
+                    <>
+                      {link.icon}
+                      <span>{link.title}</span>
+                    </>
+                  ) : (
+                    <Link to={link.url} prefetch="intent">
+                      {link.icon}
+                    </Link>
+                  )}
                   <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
@@ -448,14 +446,12 @@ export default function Layout() {
               <SidebarGroup>
                 <SidebarMenuItem key={"Kontrollpanel"}>
                   <SidebarMenuButton asChild tooltip={"Kontrollpanel"}>
-                    <Link to={"#"} prefetch="intent">
+                    <Link to={href("/dashboard")} prefetch="intent">
                       {<LayoutDashboard />}
                       <span>{"Kontrollpanel"}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              </SidebarGroup>
-              <SidebarGroup>
                 <NavLinks links={mainLinks} />
               </SidebarGroup>
               <SidebarGroup>
