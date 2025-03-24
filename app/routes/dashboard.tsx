@@ -10,6 +10,7 @@ import {
   ChevronsUpDown,
   CircleEllipsis,
   Info,
+  LayoutDashboard,
   LogOut,
   MapPinned,
   NotebookPen,
@@ -61,9 +62,10 @@ import {
 } from "@/ui/sidebar";
 
 const user = {
-  name: "shadcn",
-  email: "m@example.com",
-  avatar: "",
+  name: "Julia Dai",
+  email: "julia@vektorprogrammet.no",
+  avatar:
+    "https://vektorprogrammet.no/media/cache/profile_img/images/Profile%20photos/6407131bab385.jpeg",
 };
 
 function UserMenu({
@@ -88,7 +90,7 @@ function UserMenu({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">Profil</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
@@ -443,6 +445,16 @@ export default function Layout() {
           <SidebarContent>
             <nav aria-label="primary">
               {/* Primary navigation */}
+              <SidebarGroup>
+                <SidebarMenuItem key={"Kontrollpanel"}>
+                  <SidebarMenuButton asChild tooltip={"Kontrollpanel"}>
+                    <Link to={"#"} prefetch="intent">
+                      {<LayoutDashboard />}
+                      <span>{"Kontrollpanel"}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarGroup>
               <SidebarGroup>
                 <NavLinks links={mainLinks} />
               </SidebarGroup>
