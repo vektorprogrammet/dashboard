@@ -145,51 +145,51 @@ const mainLinks = [
       },
       {
         title: "Intervjufordeling",
-        url: "#",
+        url: href("/dashboard/intervjufordeling"),
       },
       {
         title: "Intervjuer",
-        url: "#",
+        url: href("/dashboard/intervjuer"),
       },
       {
         title: "Statistikk",
-        url: "#",
+        url: href("/dashboard/statistikk"),
       },
     ],
   },
   {
     title: "Assistenter",
-    url: "#",
+    url: href("/dashboard/assistenter"),
     icon: <BookUser size={16} />,
     isActive: false,
     links: [
       {
         title: "Assistenter",
-        url: "#",
+        url: href("/dashboard/assistenter"),
       },
       {
         title: "Vikarer",
-        url: "#",
+        url: href("/dashboard/vikarer"),
       },
       {
         title: "Skoler",
-        url: "#",
+        url: href("/dashboard/skoler"),
       },
     ],
   },
   {
     title: "Brukere",
-    url: "#",
+    url: href("/dashboard/brukere"),
     icon: <Users size={16} />,
     isActive: false,
     links: [
       {
-        title: "Epostliste",
-        url: "#",
+        title: "Alle Brukere",
+        url: href("/dashboard/brukere"),
       },
       {
-        title: "Alle Brukere",
-        url: "#",
+        title: "Epostliste",
+        url: href("/dashboard/epostliste"),
       },
     ],
   },
