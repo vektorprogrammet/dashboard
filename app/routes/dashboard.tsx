@@ -197,61 +197,61 @@ const mainLinks = [
 const adminLinks = [
   {
     title: "Team",
-    url: "#",
+    url: href("/dashboard/team"),
     icon: <NotebookPen size={16} />,
     isActive: false,
     links: [
       {
         title: "Team",
-        url: "#",
+        url: href("/dashboard/team"),
       },
       {
         title: "Teaminteresse",
-        url: "#",
+        url: href("/dashboard/teaminteresse"),
       },
     ],
   },
   {
     title: "Økonomi",
-    url: "#",
+    url: href("/dashboard/utlegg"),
     icon: <PiggyBank size={16} />,
     isActive: false,
     links: [
       {
         title: "Utlegg",
-        url: "#",
+        url: href("/dashboard/utlegg"),
       },
       {
         title: "Sponsorer",
-        url: "#",
+        url: href("/dashboard/sponsorer"),
       },
     ],
   },
   {
     title: "Annet",
-    url: "#",
+    url: href("/dashboard/attester"),
     icon: <CircleEllipsis size={16} />,
     isActive: false,
     links: [
       {
         title: "Attester",
-        url: "#",
+        url: href("/dashboard/attester"),
       },
       {
         title: "Intervjusjema",
-        url: "#",
+        url: href("/dashboard/intervjusjema"),
       },
       {
         title: "Avdelinger",
-        url: "#",
+        url: href("/dashboard/avdelinger"),
       },
       {
         title: "Linjer",
-        url: "#",
+        url: href("/dashboard/linjer"),
       },
       {
         title: "Opptaksperioder",
-        url: "#",
+        url: href("/dashboard/opptaksperioder"),
       },
     ],
   },
