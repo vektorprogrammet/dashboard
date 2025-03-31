@@ -18,6 +18,19 @@
     "attributePosition": "auto"
   },
   "organizeImports": { "enabled": true },
+  "overrides": [
+    {
+      "include": ["app/routes/**/*.tsx", "app/routes/**/*.ts"],
+      "linter": {
+        "enabled": true,
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
+        }
+      }
+    }
+  ],
   "linter": {
     "enabled": true,
     "rules": {
