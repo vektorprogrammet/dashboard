@@ -1,6 +1,5 @@
 import { DataTable } from "@/components/data-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataSokere } from "../mock/api/data-sokere";
 
@@ -72,8 +71,7 @@ export const columns: Array<ColumnDef<Soker>> = [
 export default function Sokere() {
   return (
     <main className="flex h-full w-screen flex-col items-center justify-center gap-5 overflow-clip p-1 md:w-full md:p-6">
-      <Tabs defaultValue="account" className="w-[400px]">
-        {/* Todo: Routing for Data tables */}
+      {/* <Tabs defaultValue="account" className="w-[400px]">
         <TabsList>
           <TabsTrigger value="sokere">Søkere</TabsTrigger>
           <TabsTrigger value="tidligereAssistenter">
@@ -82,7 +80,7 @@ export default function Sokere() {
           <TabsTrigger value="intervjufordeling">Intervjufordeling</TabsTrigger>
           <TabsTrigger value="intervjuer">Intervjuer</TabsTrigger>
         </TabsList>
-      </Tabs>
+      </Tabs> */}
       <DataTable columns={columns} data={DataSokere} />
     </main>
   );
