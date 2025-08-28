@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calender";
-import { Dialog } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -27,7 +27,7 @@ import {
 import { defineMeta, filterFn } from "@/lib/filters";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DialogContent, DialogTrigger } from "@radix-ui/react-dialog";
+
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { CalendarIcon, CircleDotDashedIcon } from "lucide-react";
@@ -108,11 +108,11 @@ export const columns = [
                 Vis kvittering
               </button>
             </DialogTrigger>
-            <DialogContent className="max-w-xs p-4">
+            <DialogContent className="w-auto max-w-none p-1">
               <img
                 src={url}
                 alt="Kvittering"
-                className="w-full h-auto rounded-md"
+                className="max-h-[80vh] max-w-full rounded-md"
               />
             </DialogContent>
           </Dialog>
