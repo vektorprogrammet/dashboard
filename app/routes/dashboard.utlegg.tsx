@@ -28,7 +28,13 @@ import { defineMeta, filterFn } from "@/lib/filters";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { createColumnHelper } from "@tanstack/react-table";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  ColumnDef,
+  createColumnHelper,
+  Row,
+  Table,
+} from "@tanstack/react-table";
 import { format } from "date-fns";
 import { CalendarIcon, CircleDotDashedIcon } from "lucide-react";
 import { useState } from "react";
@@ -48,7 +54,29 @@ export type Utlegg = {
 
 const columnHelper = createColumnHelper<Utlegg>();
 
-export const columns = [
+export const columns: ColumnDef<Utlegg, any>[] = [
+  {
+    id: "select",
+    header: ({ table }: { table: Table<Utlegg> }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }: { row: Row<Utlegg> }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   columnHelper.accessor("id", {
     header: "Id",
   }),
@@ -166,6 +194,7 @@ export default function Utlegg() {
     defaultValues: {
       category: "",
       region: "",
+      accountNumber: "",
     },
   });
 
@@ -207,7 +236,6 @@ export default function Utlegg() {
                         hele beløpet skal dekkes. Hvis du kun får dekket deler
                         av summen, skriv beløpet som skal dekkes.
                       </FormDescription>
-                      <FormMessage />
                       <FormControl>
                         <div className="relative">
                           <Input className="bg-white" {...field} />
@@ -216,6 +244,7 @@ export default function Utlegg() {
                           </span>
                         </div>
                       </FormControl>
+                      <FormMessage className="text-black" />
                     </FormItem>
                   )}
                 />
@@ -225,9 +254,9 @@ export default function Utlegg() {
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel>Utleggsdato</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
+                      <FormControl>
+                        <Popover>
+                          <PopoverTrigger asChild>
                             <Button
                               variant={"outline"}
                               className={cn(
@@ -242,20 +271,21 @@ export default function Utlegg() {
                               )}
                               <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                             </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) =>
-                              date > new Date() || date < new Date("1900-01-01")
-                            }
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date) =>
+                                date > new Date() ||
+                                date < new Date("2022-01-01")
+                              }
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      </FormControl>
                     </FormItem>
                   )}
                 />
@@ -275,7 +305,7 @@ export default function Utlegg() {
                             )}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-black" />
                       </FormItem>
                     )}
                   />
