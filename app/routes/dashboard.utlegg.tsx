@@ -36,7 +36,7 @@ import {
   Table,
 } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { CalendarIcon, CircleDotDashedIcon } from "lucide-react";
+import { CalendarIcon, CircleDotDashedIcon, Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -209,10 +209,20 @@ export default function Utlegg() {
         <div className="md:w-1/2">
           <Button
             variant="outline"
-            className="my-4"
+            className="my-2"
             onClick={() => setOpenForm(!openForm)}
           >
-            {openForm ? <p>- Skjul skjema</p> : <p>+ Nytt utlegg</p>}
+            {openForm ? (
+              <>
+                <Minus />
+                <p> Skjul skjema</p>
+              </>
+            ) : (
+              <>
+                <Plus />
+                <p>Nytt utlegg</p>
+              </>
+            )}
           </Button>
           <div
             className={cn(
