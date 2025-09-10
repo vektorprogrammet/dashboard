@@ -118,6 +118,10 @@ export const columns: ColumnDef<Utlegg, any>[] = [
   columnHelper.accessor("sum", {
     header: "Sum",
     filterFn: filterFn("number"),
+    cell: ({ getValue }) => {
+      const value = getValue<number>();
+      return `${value.toFixed(2)} kr`;
+    },
     meta: defineMeta((row) => row.sum, {
       displayName: "Sum",
       type: "number",
@@ -164,11 +168,24 @@ export const columns: ColumnDef<Utlegg, any>[] = [
 ];
 
 const formSchema = z.object({
-  date: z.date(),
-  category: z.string(),
-  region: z.string(),
-  sum: z.coerce.number(),
-  receipt: z.instanceof(File).optional(),
+  date: z.date({ message: "Dato er påkrevd" }),
+  category: z.string().nonempty({ message: "Region er påkrevd" }),
+  region: z.string().min(1, { message: "Region er påkrevd" }),
+  sum: z.preprocess(
+    (val) => {
+      if (typeof val === "string") {
+        return parseFloat(val.replace(",", "."));
+      }
+      return val;
+    },
+    z
+      .number({
+        invalid_type_error: "Beløp må være et tall",
+        required_error: "Beløp er påkrevd",
+      })
+      .positive({ message: "Beløp må være større enn 0" })
+  ),
+  receipt: z.instanceof(File, { message: "Bilde av kvitteringen er påkrevd" }),
   accountNumber: z
     .string()
     .min(1, { message: "Kontonummer er påkrevd" })
@@ -296,6 +313,7 @@ export default function Utlegg() {
                           </PopoverContent>
                         </Popover>
                       </FormControl>
+                      <FormMessage className="text-black" />
                     </FormItem>
                   )}
                 />
@@ -334,7 +352,7 @@ export default function Utlegg() {
                             )}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-black" />
                       </FormItem>
                     )}
                   />
@@ -379,7 +397,7 @@ export default function Utlegg() {
                           }}
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-black" />
                     </FormItem>
                   )}
                 />

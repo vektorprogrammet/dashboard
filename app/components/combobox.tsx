@@ -35,7 +35,7 @@ export function ComboBoxResponsive({
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [selectedItem, setSelectedItem] = useState<Item | null>(
-    defaultItem ?? null,
+    defaultItem ?? null
   );
 
   function ItemList({
@@ -57,7 +57,7 @@ export function ComboBoxResponsive({
                 value={item.value}
                 onSelect={(value) => {
                   setSelectedItem(
-                    items.find((priority) => priority.value === value) || null,
+                    items.find((priority) => priority.value === value) || null
                   );
                   setOpen(false);
                 }}
@@ -80,7 +80,7 @@ export function ComboBoxResponsive({
             className={cn("min-w-min justify-start", className)}
           >
             <MapPinned />
-            {selectedItem ? <>{selectedItem.label}</> : <>+ Set item</>}
+            {selectedItem ? <>{selectedItem.label}</> : <> Set item</>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0" align="start">
