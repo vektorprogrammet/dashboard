@@ -1,4 +1,4 @@
-import { ComboBoxResponsive } from "@/components/combobox";
+import { ComboBoxResponsive } from "@/components/combobox-utlegg";
 import { DataTable } from "@/components/data-table-utlegg";
 import {
   Accordion,
@@ -38,7 +38,7 @@ import {
 import { format } from "date-fns";
 import { CalendarIcon, CircleDotDashedIcon, Minus, Plus } from "lucide-react";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { getCategories, getRegions, getUtlegg } from "../mock/api/data-utlegg";
 
@@ -169,7 +169,7 @@ export const columns: ColumnDef<Utlegg, any>[] = [
 
 const formSchema = z.object({
   date: z.date({ message: "Dato er påkrevd" }),
-  category: z.string().nonempty({ message: "Region er påkrevd" }),
+  category: z.string().nonempty({ message: "Kategori er påkrevd" }),
   region: z.string().min(1, { message: "Region er påkrevd" }),
   sum: z.preprocess(
     (val) => {
@@ -215,7 +215,8 @@ export default function Utlegg() {
     },
   });
 
-  function onSubmit(_values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("Submitted form values:", values);
     setOpenForm(false);
   }
 
@@ -321,16 +322,14 @@ export default function Utlegg() {
                   <FormField
                     control={form.control}
                     name="region"
-                    render={() => (
+                    render={({ field }) => (
                       <FormItem>
                         <FormLabel>Region</FormLabel>
                         <FormControl>
-                          <Controller
-                            name="region"
-                            control={form.control}
-                            render={() => (
-                              <ComboBoxResponsive items={regions} />
-                            )}
+                          <ComboBoxResponsive
+                            items={regions}
+                            value={field.value}
+                            onChange={field.onChange}
                           />
                         </FormControl>
                         <FormMessage className="text-black" />
@@ -340,16 +339,14 @@ export default function Utlegg() {
                   <FormField
                     control={form.control}
                     name="category"
-                    render={() => (
+                    render={({ field }) => (
                       <FormItem>
                         <FormLabel>Kategori</FormLabel>
                         <FormControl>
-                          <Controller
-                            name="category"
-                            control={form.control}
-                            render={() => (
-                              <ComboBoxResponsive items={categories} />
-                            )}
+                          <ComboBoxResponsive
+                            items={categories}
+                            value={field.value}
+                            onChange={field.onChange}
                           />
                         </FormControl>
                         <FormMessage className="text-black" />
