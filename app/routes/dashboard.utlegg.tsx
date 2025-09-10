@@ -120,7 +120,7 @@ export const columns: ColumnDef<Utlegg, any>[] = [
     filterFn: filterFn("number"),
     cell: ({ getValue }) => {
       const value = getValue<number>();
-      return `${value.toFixed(2)} kr`;
+      return `${value.toFixed(2).replace(".", ",")} kr`;
     },
     meta: defineMeta((row) => row.sum, {
       displayName: "Sum",
@@ -174,6 +174,9 @@ const formSchema = z.object({
   sum: z.preprocess(
     (val) => {
       if (typeof val === "string") {
+        if (!/^\d+([.,]\d+)?$/.test(val.trim())) {
+          return NaN;
+        }
         return parseFloat(val.replace(",", "."));
       }
       return val;
@@ -216,7 +219,6 @@ export default function Utlegg() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Submitted form values:", values);
     setOpenForm(false);
   }
 
