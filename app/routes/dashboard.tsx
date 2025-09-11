@@ -112,10 +112,12 @@ function UserMenu({
                   Profil
                 </DropdownMenuItem>
               </Link>
-              <DropdownMenuItem>
-                <Receipt />
-                Mine Utlegg
-              </DropdownMenuItem>
+              <Link to={href("/dashboard/utlegg")} prefetch="intent">
+                <DropdownMenuItem>
+                  <Receipt />
+                  Mine Utlegg
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
@@ -141,7 +143,7 @@ const mainLinks = [
       },
       {
         title: "Tidligere Assistenter",
-        url: href("/dashboard/tidligereassistenter"),
+        url: href("/dashboard/tidligere-assistenter"),
       },
       {
         title: "Intervjufordeling",
@@ -152,8 +154,8 @@ const mainLinks = [
         url: href("/dashboard/intervjuer"),
       },
       {
-        title: "Utlegg",
-        url: "/dashboard/utlegg",
+        title: "Statistikk",
+        url: href("/dashboard/statistikk"),
       },
     ],
   },
