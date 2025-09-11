@@ -5,28 +5,21 @@ import {
 } from "@radix-ui/react-collapsible";
 import { Separator } from "@radix-ui/react-separator";
 import {
-  BadgeCheck,
-  Bell,
-  ChartLine,
+  BookUser,
   ChevronRight,
   ChevronsUpDown,
-  Database,
-  Folder,
-  Forward,
-  Frame,
+  CircleEllipsis,
   Info,
-  LifeBuoy,
+  LayoutDashboard,
   LogOut,
-  MapIcon,
   MapPinned,
-  MoreHorizontal,
   NotebookPen,
-  PieChart,
+  PiggyBank,
   Receipt,
   Send,
-  Settings,
-  Trash2,
+  TrendingUp,
   User,
+  Users,
 } from "lucide-react";
 import { Fragment, type ReactNode, useState } from "react";
 import { Link, NavLink, Outlet, href, useLocation } from "react-router";
@@ -58,7 +51,6 @@ import {
   SidebarHeader,
   SidebarInset,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -70,9 +62,10 @@ import {
 } from "@/ui/sidebar";
 
 const user = {
-  name: "shadcn",
-  email: "m@example.com",
-  avatar: "",
+  name: "Julia Dai",
+  email: "julia@vektorprogrammet.no",
+  avatar:
+    "https://vektorprogrammet.no/media/cache/profile_img/images/Profile%20photos/6407131bab385.jpeg",
 };
 
 function UserMenu({
@@ -97,7 +90,7 @@ function UserMenu({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">Profil</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
@@ -113,10 +106,6 @@ function UserMenu({
             sideOffset={4}
           >
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Konto
-              </DropdownMenuItem>
               <Link to={href("/dashboard/profile")} prefetch="intent">
                 <DropdownMenuItem>
                   <User />
@@ -125,11 +114,7 @@ function UserMenu({
               </Link>
               <DropdownMenuItem>
                 <Receipt />
-                Utlegg
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifikasjoner
+                Mine Utlegg
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -146,28 +131,25 @@ function UserMenu({
 const mainLinks = [
   {
     title: "Opptak",
-    url: "#",
-    icon: <NotebookPen />,
-    isActive: true,
+    url: href("/dashboard/sokere"),
+    icon: <TrendingUp size={16} />,
+    isActive: false,
     links: [
+      {
+        title: "Nye Søkere",
+        url: href("/dashboard/sokere"),
+      },
+      {
+        title: "Tidligere Assistenter",
+        url: href("/dashboard/tidligereassistenter"),
+      },
       {
         title: "Intervjufordeling",
-        url: "/dashboard/intervjufordeling",
+        url: href("/dashboard/intervjufordeling"),
       },
       {
-        title: "Intervjuskjema",
-        url: "#",
-      },
-    ],
-  },
-  {
-    title: "Statistikk",
-    url: "#",
-    icon: <ChartLine />,
-    links: [
-      {
-        title: "Opptak",
-        url: "#",
+        title: "Intervjuer",
+        url: href("/dashboard/intervjuer"),
       },
       {
         title: "Utlegg",
@@ -176,119 +158,100 @@ const mainLinks = [
     ],
   },
   {
-    title: "Informasjon",
-    url: "#",
-    icon: <Info />,
+    title: "Assistenter",
+    url: href("/dashboard/assistenter"),
+    icon: <BookUser size={16} />,
+    isActive: false,
     links: [
       {
-        title: "Artikler",
-        url: "#",
+        title: "Assistenter",
+        url: href("/dashboard/assistenter"),
       },
       {
-        title: "Changelog",
-        url: "#",
+        title: "Vikarer",
+        url: href("/dashboard/vikarer"),
       },
       {
-        title: "Stand",
-        url: "#",
+        title: "Skoler",
+        url: href("/dashboard/skoler"),
       },
     ],
   },
   {
-    title: "Data",
-    url: "#",
-    icon: <Database />,
+    title: "Brukere",
+    url: href("/dashboard/brukere"),
+    icon: <Users size={16} />,
+    isActive: false,
     links: [
       {
-        title: "Arrangementer",
-        url: "#",
+        title: "Alle Brukere",
+        url: href("/dashboard/brukere"),
       },
       {
-        title: "Attester",
-        url: "#",
+        title: "Epostliste",
+        url: href("/dashboard/epostliste"),
       },
-      {
-        title: "Assistenter",
-        url: "#",
-      },
-      {
-        title: "Avdelinger",
-        url: "#",
-      },
-      {
-        title: "Brukere",
-        url: "#",
-      },
-      {
-        title: "Brukergruppesamlinger",
-        url: "#",
-      },
-      {
-        title: "Hovedstyret",
-        url: "#",
-      },
-      {
-        title: "Opptak",
-        url: "#",
-      },
-      {
-        title: "Opptaksperioder",
-        url: "#",
-      },
+    ],
+  },
+];
+const adminLinks = [
+  {
+    title: "Team",
+    url: href("/dashboard/team"),
+    icon: <NotebookPen size={16} />,
+    isActive: false,
+    links: [
       {
         title: "Team",
-        url: "#",
+        url: href("/dashboard/team"),
       },
       {
         title: "Teaminteresse",
-        url: "#",
+        url: href("/dashboard/teaminteresse"),
+      },
+    ],
+  },
+  {
+    title: "Økonomi",
+    url: href("/dashboard/utlegg"),
+    icon: <PiggyBank size={16} />,
+    isActive: false,
+    links: [
+      {
+        title: "Utlegg",
+        url: href("/dashboard/utlegg"),
       },
       {
         title: "Sponsorer",
-        url: "#",
-      },
-      {
-        title: "Skoler",
-        url: "#",
-      },
-      {
-        title: "Linjer",
-        url: "#",
-      },
-      {
-        title: "Undersøkelser",
-        url: "#",
-      },
-      {
-        title: "Vikarer",
-        url: "#",
+        url: href("/dashboard/sponsorer"),
       },
     ],
   },
   {
     title: "Annet",
-    url: "#",
-    icon: <Settings />,
+    url: href("/dashboard/attester"),
+    icon: <CircleEllipsis size={16} />,
+    isActive: false,
     links: [
       {
-        title: "Access Control",
-        url: "#",
+        title: "Attester",
+        url: href("/dashboard/attester"),
       },
       {
-        title: "Kontrollpanel",
-        url: "#",
+        title: "Intervjusjema",
+        url: href("/dashboard/intervjusjema"),
       },
       {
-        title: "Timeplan",
-        url: "#",
+        title: "Avdelinger",
+        url: href("/dashboard/avdelinger"),
       },
       {
-        title: "Epostlister",
-        url: "#",
+        title: "Linjer",
+        url: href("/dashboard/linjer"),
       },
       {
-        title: "Slab",
-        url: "#",
+        title: "Opptaksperioder",
+        url: href("/dashboard/opptaksperioder"),
       },
     ],
   },
@@ -308,135 +271,52 @@ function NavLinks({
     }>;
   }>;
 }) {
+  const { open } = useSidebar();
+
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
-      <SidebarMenu>
-        {links.map((link) => {
-          if (!link.links) {
-            return (
-              <SidebarMenuItem key={link.title}>
-                <SidebarMenuButton asChild>
-                  <Link to={link.url} prefetch="intent">
-                    {link.icon}
-                    <span>{link.title}</span>
-                  </Link>
+    <SidebarMenu>
+      {links.map((link) => {
+        return (
+          <Collapsible
+            key={link.title}
+            asChild
+            defaultOpen={link.isActive}
+            className="group/collapsible"
+          >
+            <SidebarMenuItem>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuButton tooltip={link.title}>
+                  {open ? (
+                    <>
+                      {link.icon}
+                      <span>{link.title}</span>
+                    </>
+                  ) : (
+                    <Link to={link.url} prefetch="intent">
+                      {link.icon}
+                    </Link>
+                  )}
+                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
-              </SidebarMenuItem>
-            );
-          }
-          return (
-            <Collapsible
-              key={link.title}
-              asChild
-              defaultOpen={link.isActive}
-              className="group/collapsible"
-            >
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton tooltip={link.title}>
-                    {link.icon}
-                    <span>{link.title}</span>
-                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {link.links?.map((subLink) => (
-                      <SidebarMenuSubItem key={subLink.title}>
-                        <SidebarMenuSubButton asChild>
-                          <Link to={subLink.url} prefetch="intent">
-                            <span>{subLink.title}</span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-          );
-        })}
-      </SidebarMenu>
-    </SidebarGroup>
-  );
-}
-const projectsData = [
-  {
-    name: "Design Engineering",
-    url: "#",
-    icon: <Frame />,
-  },
-  {
-    name: "Sales & Marketing",
-    url: "#",
-    icon: <PieChart />,
-  },
-  {
-    name: "Travel",
-    url: "#",
-    icon: <MapIcon />,
-  },
-];
-function NavItems({
-  items,
-}: {
-  items: Array<{
-    name: string;
-    url: string;
-    icon: ReactNode;
-  }>;
-}) {
-  const isMobile = useSidebar();
-  return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
-      <SidebarMenu>
-        {items.map((item) => (
-          <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
-              <Link to={item.url} prefetch="intent">
-                {item.icon}
-                <span>{item.name}</span>
-              </Link>
-            </SidebarMenuButton>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuAction showOnHover>
-                  <MoreHorizontal />
-                  <span className="sr-only">More</span>
-                </SidebarMenuAction>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-48 rounded-lg"
-                side={isMobile ? "bottom" : "right"}
-                align={isMobile ? "end" : "start"}
-              >
-                <DropdownMenuItem>
-                  <Folder />
-                  <span>View Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Forward />
-                  <span>Share Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Trash2 />
-                  <span>Delete Project</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroup>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {link.links?.map((subLink) => (
+                    <SidebarMenuSubItem key={subLink.title}>
+                      <SidebarMenuSubButton asChild>
+                        <Link to={subLink.url} prefetch="intent">
+                          <span>{subLink.title}</span>
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </SidebarMenuItem>
+          </Collapsible>
+        );
+      })}
+    </SidebarMenu>
   );
 }
 
@@ -563,8 +443,21 @@ export default function Layout() {
           <SidebarContent>
             <nav aria-label="primary">
               {/* Primary navigation */}
-              <NavLinks links={mainLinks} />
-              <NavItems items={projectsData} />
+              <SidebarGroup>
+                <SidebarMenuItem key={"Kontrollpanel"}>
+                  <SidebarMenuButton asChild tooltip={"Kontrollpanel"}>
+                    <Link to={href("/dashboard")} prefetch="intent">
+                      {<LayoutDashboard />}
+                      <span>{"Kontrollpanel"}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <NavLinks links={mainLinks} />
+              </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>Admin</SidebarGroupLabel>
+                <NavLinks links={adminLinks} />
+              </SidebarGroup>
             </nav>
           </SidebarContent>
           <SidebarFooter className="m-0 p-2">
@@ -574,7 +467,7 @@ export default function Layout() {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {[
-                      { title: "Support", url: "#", icon: <LifeBuoy /> },
+                      { title: "Slab", url: "#", icon: <Info /> },
                       { title: "Feedback", url: "#", icon: <Send /> },
                     ].map((link) => (
                       <SidebarMenuItem key={link.title}>
