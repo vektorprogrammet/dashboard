@@ -415,7 +415,14 @@ export default function Utlegg() {
                 kaffeposer til stand, kake til arrangementer og lignende. Det er
                 ellers lurt å høre med en leder om du kan få utlegget ditt
                 refundert før du legger ut. Om du har spørsmål kan du kontakte
-                økonomiteamet på okonomi@vektorprogrammet.no.
+                økonomiteamet på{" "}
+                <a
+                  href={`mailto:$okonomi@vektorprogrammet.no`}
+                  className="text-blue-600 hover:underline"
+                >
+                  okonomi@vektorprogrammet.no
+                </a>
+                .
               </AccordionContent>
             </AccordionItem>
           </Accordion>
