@@ -35,7 +35,7 @@ export function ComboBoxResponsive({
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [selectedItem, setSelectedItem] = useState<Item | null>(
-    defaultItem ?? null
+    defaultItem ?? null,
   );
 
   function ItemList({
@@ -57,7 +57,7 @@ export function ComboBoxResponsive({
                 value={item.value}
                 onSelect={(value) => {
                   setSelectedItem(
-                    items.find((priority) => priority.value === value) || null
+                    items.find((priority) => priority.value === value) || null,
                   );
                   setOpen(false);
                 }}

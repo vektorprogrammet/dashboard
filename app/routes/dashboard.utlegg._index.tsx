@@ -30,10 +30,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-  ColumnDef,
+  type ColumnDef,
+  type Row,
+  type Table,
   createColumnHelper,
-  Row,
-  Table,
 } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { CalendarIcon, CircleDotDashedIcon, Minus, Plus } from "lucide-react";
@@ -54,7 +54,8 @@ export type Utlegg = {
 
 const columnHelper = createColumnHelper<Utlegg>();
 
-export const columns: ColumnDef<Utlegg, any>[] = [
+//biome-ignore lint: accepting any type
+export const columns: Array<ColumnDef<Utlegg, any>> = [
   {
     id: "select",
     header: ({ table }: { table: Table<Utlegg> }) => (
@@ -136,7 +137,10 @@ export const columns: ColumnDef<Utlegg, any>[] = [
         url.length > 0 && (
           <Dialog>
             <DialogTrigger asChild>
-              <button className="underline text-blue-600 hover:text-blue-800 text-sm">
+              <button
+                type="button"
+                className="text-blue-600 text-sm underline hover:text-blue-800"
+              >
                 Vis kvittering
               </button>
             </DialogTrigger>
@@ -175,15 +179,17 @@ const formSchema = z.object({
     (val) => {
       if (typeof val === "string") {
         if (!/^\d+([.,]\d+)?$/.test(val.trim())) {
-          return NaN;
+          return Number.NaN;
         }
-        return parseFloat(val.replace(",", "."));
+        return Number.parseFloat(val.replace(",", "."));
       }
       return val;
     },
     z
       .number({
+        //biome-ignore lint: using z where error type name isn't in camelcase
         invalid_type_error: "Beløp må være et tall",
+        //biome-ignore lint: using z where error type name isn't in camelcase
         required_error: "Beløp er påkrevd",
       })
       .positive({ message: "Beløp må være større enn 0" })
@@ -219,14 +225,14 @@ export default function Utlegg() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(_values: z.infer<typeof formSchema>) {
     setOpenForm(false);
   }
 
   return (
     <section className="flex flex-col items-center">
-      <h1 className="font-semibold text-2xl mb-10">Mine utlegg</h1>
-      <div className="flex md:flex-row flex-col mb-10 w-5/6 flex-start space-x-4">
+      <h1 className="mb-10 font-semibold text-2xl">Mine utlegg</h1>
+      <div className="mb-10 flex w-5/6 flex-start flex-col space-x-4 md:flex-row">
         <div className="md:w-1/2">
           <Button
             variant="outline"
@@ -247,14 +253,14 @@ export default function Utlegg() {
           </Button>
           <div
             className={cn(
-              "transition-all duration-320 overflow-hidden",
+              "overflow-hidden transition-all duration-320",
               openForm ? "max-h-[1000px] opacity-100" : "max-h-0"
             )}
           >
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="bg-gray-50 rounded-lg p-6 space-y-8"
+                className="space-y-8 rounded-lg bg-gray-50 p-6"
               >
                 <FormField
                   control={form.control}
@@ -406,7 +412,7 @@ export default function Utlegg() {
             </Form>
           </div>
         </div>
-        <div className="md:w-1/2 md:ml-6 ">
+        <div className="md:ml-6 md:w-1/2 ">
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger>Hva kan jeg få refundert?</AccordionTrigger>
@@ -417,7 +423,7 @@ export default function Utlegg() {
                 refundert før du legger ut. Om du har spørsmål kan du kontakte
                 økonomiteamet på{" "}
                 <a
-                  href={`mailto:$okonomi@vektorprogrammet.no`}
+                  href={"mailto:$okonomi@vektorprogrammet.no"}
                   className="text-blue-600 hover:underline"
                 >
                   okonomi@vektorprogrammet.no
@@ -428,7 +434,7 @@ export default function Utlegg() {
           </Accordion>
         </div>
       </div>
-      <section className="w-5/6 my-4">
+      <section className="my-4 w-5/6">
         <DataTable columns={columns} data={utlegg} />
       </section>
     </section>

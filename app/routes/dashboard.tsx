@@ -400,7 +400,7 @@ function Breadcrumbs() {
             to={`/${fullPath}`}
             className={cn(
               isEnd ? "text-black" : "text-gray-500",
-              "hover:text-black"
+              "hover:text-black",
             )}
             prefetch="intent"
           >

@@ -1,3 +1,6 @@
+// This component is taken from https://ui.bazza.dev/docs/data-table-filter
+// Biome linting rules are ignored in the config file
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
