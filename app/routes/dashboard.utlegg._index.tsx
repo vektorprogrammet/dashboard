@@ -192,7 +192,7 @@ const formSchema = z.object({
         //biome-ignore lint: using z where error type name isn't in camelcase
         required_error: "Beløp er påkrevd",
       })
-      .positive({ message: "Beløp må være større enn 0" })
+      .positive({ message: "Beløp må være større enn 0" }),
   ),
   receipt: z.instanceof(File, { message: "Bilde av kvitteringen er påkrevd" }),
   accountNumber: z
@@ -254,7 +254,7 @@ export default function Utlegg() {
           <div
             className={cn(
               "overflow-hidden transition-all duration-320",
-              openForm ? "max-h-[1000px] opacity-100" : "max-h-0"
+              openForm ? "max-h-[1000px] opacity-100" : "max-h-0",
             )}
           >
             <Form {...form}>
@@ -298,7 +298,7 @@ export default function Utlegg() {
                               variant={"outline"}
                               className={cn(
                                 "w-auto pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
+                                !field.value && "text-muted-foreground",
                               )}
                             >
                               {field.value ? (
