@@ -2,7 +2,7 @@
 // Biome linting rules are ignored in the config file
 
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/components/ui/calender";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Command,
