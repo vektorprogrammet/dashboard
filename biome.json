@@ -6,7 +6,15 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["package.json", ".vscode", "app/components/ui/*", "*.config.ts"]
+    "ignore": [
+      "package.json",
+      ".vscode",
+      "app/components/ui/*",
+      "*.config.ts",
+      "app/components/data-table-filter.tsx",
+      "app/lib/filters.ts",
+      "app/lib/array.ts"
+    ]
   },
   "formatter": {
     "enabled": true,

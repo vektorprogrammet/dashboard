@@ -13,7 +13,7 @@ import {
 import { Drawer, DrawerContent, DrawerTrigger } from "@/ui/drawer";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useMediaQuery } from "@mantine/hooks";
-import { MapPinned } from "lucide-react";
+import { Component } from "lucide-react";
 import { useState } from "react";
 
 type Item = {
@@ -23,28 +23,25 @@ type Item = {
 
 type ComboBoxProps = {
   items: Array<Item>;
+  value: string;
+  onChange?: (value: string) => void;
   defaultItem?: Item;
   className?: string;
 };
 
 export function ComboBoxResponsive({
   items,
+  value,
+  onChange,
   defaultItem,
   className,
 }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const [selectedItem, setSelectedItem] = useState<Item | null>(
-    defaultItem ?? null,
-  );
+  const selectedItem =
+    items.find((item) => item.value === value) ?? defaultItem ?? null;
 
-  function ItemList({
-    setOpen,
-    setSelectedItem,
-  }: {
-    setOpen: (open: boolean) => void;
-    setSelectedItem: (item: Item | null) => void;
-  }) {
+  function ItemList() {
     return (
       <Command>
         <CommandInput placeholder="Filter items..." />
@@ -55,10 +52,8 @@ export function ComboBoxResponsive({
               <CommandItem
                 key={item.value}
                 value={item.value}
-                onSelect={(value) => {
-                  setSelectedItem(
-                    items.find((priority) => priority.value === value) || null,
-                  );
+                onSelect={(val) => {
+                  onChange?.(val);
                   setOpen(false);
                 }}
               >
@@ -79,12 +74,12 @@ export function ComboBoxResponsive({
             variant="outline"
             className={cn("min-w-min justify-start", className)}
           >
-            <MapPinned />
-            {selectedItem ? <>{selectedItem.label}</> : <> Set item</>}
+            <Component />
+            {selectedItem ? <>{selectedItem.label}</> : <> Velg</>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0" align="start">
-          <ItemList setOpen={setOpen} setSelectedItem={setSelectedItem} />
+          <ItemList />
         </PopoverContent>
       </Popover>
     );
@@ -97,13 +92,13 @@ export function ComboBoxResponsive({
           variant="outline"
           className={cn("min-w-min justify-start", className)}
         >
-          <MapPinned />
-          {selectedItem ? <>{selectedItem.label}</> : <>+ Set item</>}
+          <Component />
+          {selectedItem ? <>{selectedItem.label}</> : <>Velg</>}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">
-          <ItemList setOpen={setOpen} setSelectedItem={setSelectedItem} />
+          <ItemList />
         </div>
       </DrawerContent>
     </Drawer>
