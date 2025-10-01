@@ -141,7 +141,7 @@ const mainLinks = [
       },
       {
         title: "Tidligere Assistenter",
-        url: href("/dashboard/tidligereassistenter"),
+        url: "/dashboard/tidligereassistenter",
       },
       {
         title: "Intervjufordeling",
