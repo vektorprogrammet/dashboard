@@ -1,18 +1,90 @@
+import { DataTable } from "@/components/data-table";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ColumnDef } from "@tanstack/react-table";
+import { getActiveSchools, getInactiveSchools } from "../mock/api/data-skoler";
+
+export type School = {
+  name: string;
+  contact: string;
+  phone: string;
+  email: string;
+  language: string;
+};
+
+export const columns: Array<ColumnDef<School>> = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "name",
+    header: "Skole",
+  },
+  {
+    accessorKey: "contact",
+    header: "Kontaktperson",
+  },
+  {
+    accessorKey: "phone",
+    header: "Telefon",
+  },
+  {
+    accessorKey: "email",
+    header: "E-post",
+  },
+  {
+    accessorKey: "language",
+    header: "Språk",
+  },
+];
 
 // biome-ignore lint/style/noDefaultExport: Route Modules require default export https://reactrouter.com/start/framework/route-module
 export default function Skoler() {
+  const activeSchools = getActiveSchools();
+  const inactiveSchools = getInactiveSchools();
+
   return (
     <>
       <section className="flex flex-col items-center">
         <h1 className="mb-10 font-semibold text-2xl">Skoler</h1>
-        <Tabs defaultValue="active" className="w-[400px] items-center">
-          <TabsList>
-            <TabsTrigger value="active">Aktive skoler</TabsTrigger>
-            <TabsTrigger value="inactive">Inaktive skoler</TabsTrigger>
-          </TabsList>
-          <TabsContent value="active">Active</TabsContent>
-          <TabsContent value="inactive">Inactive</TabsContent>
+        <Tabs defaultValue="active" className="w-full max-w-7xl mx-10 mb-6">
+          <div className="flex justify-center">
+            <TabsList className="my-5">
+              <TabsTrigger value="active">Aktive skoler</TabsTrigger>
+              <TabsTrigger value="inactive">Inaktive skoler</TabsTrigger>
+            </TabsList>
+          </div>
+          <TabsContent
+            className="w-full h-[500px] md:h-[600px] px-5"
+            value="active"
+          >
+            <DataTable columns={columns} data={activeSchools}></DataTable>
+          </TabsContent>
+          <TabsContent
+            className="5/6 h-[500px] md:h-[700px] px-5"
+            value="inactive"
+          >
+            <DataTable columns={columns} data={inactiveSchools}></DataTable>
+          </TabsContent>
         </Tabs>
       </section>
     </>
