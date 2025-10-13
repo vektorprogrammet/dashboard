@@ -64,26 +64,29 @@ export default function Skoler() {
 
   return (
     <>
-      <section className="flex flex-col items-center">
+      <section className="flex flex-col items-center w-full min-w-0">
         <h1 className="mb-10 font-semibold text-2xl">Skoler</h1>
-        <Tabs defaultValue="active" className="w-full max-w-7xl mx-10 mb-6">
+        <Tabs
+          defaultValue="active"
+          className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mb-6"
+        >
           <div className="flex justify-center">
-            <TabsList className="my-5">
+            <TabsList className="my-5 flex flex-wrap justify-center">
               <TabsTrigger value="active">Aktive skoler</TabsTrigger>
               <TabsTrigger value="inactive">Inaktive skoler</TabsTrigger>
             </TabsList>
           </div>
-          <TabsContent
-            className="w-full h-[500px] md:h-[600px] px-5"
-            value="active"
-          >
-            <DataTable columns={columns} data={activeSchools}></DataTable>
+
+          <TabsContent value="active" className="overflow-x-auto min-w-0">
+            <div className="min-w-full max-w-full overflow-x-auto rounded-lg border border-gray-200">
+              <DataTable columns={columns} data={activeSchools} />
+            </div>
           </TabsContent>
-          <TabsContent
-            className="5/6 h-[500px] md:h-[700px] px-5"
-            value="inactive"
-          >
-            <DataTable columns={columns} data={inactiveSchools}></DataTable>
+
+          <TabsContent value="inactive" className="overflow-x-auto min-w-0">
+            <div className="min-w-full max-w-full overflow-x-auto rounded-lg border border-gray-200">
+              <DataTable columns={columns} data={inactiveSchools} />
+            </div>
           </TabsContent>
         </Tabs>
       </section>

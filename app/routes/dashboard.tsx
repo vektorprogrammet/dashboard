@@ -398,7 +398,7 @@ function Breadcrumbs() {
             to={`/${fullPath}`}
             className={cn(
               isEnd ? "text-black" : "text-gray-500",
-              "hover:text-black",
+              "hover:text-black"
             )}
             prefetch="intent"
           >
@@ -497,7 +497,7 @@ export default function Layout() {
         </Sidebar>
       </aside>
 
-      <SidebarInset>
+      <SidebarInset className="flex-1 min-w-0 overflow-x-hidden">
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
@@ -505,7 +505,10 @@ export default function Layout() {
             <Breadcrumbs />
           </div>
         </header>
-        <Outlet />
+
+        <div className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8">
+          <Outlet />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
