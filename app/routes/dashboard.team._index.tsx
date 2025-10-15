@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -6,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTeam } from "../mock/api/data-team";
 
@@ -28,25 +30,33 @@ export const columns: Array<ColumnDef<Team>> = [
 
 export default function Team() {
   return (
-    <main className="flex h-full w-screen flex-col items-center justify-center gap-5 overflow-clip p-1 md:w-full md:p-6">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Team</TableHead>
-            <TableHead className="text-right">Opptak</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {DataTeam.map((t) => (
-            <TableRow key={t.id}>
-              <TableCell>{t.team}</TableCell>
-              <TableCell className="text-right">
-                {t.opptak ? "Åpent" : "Stengt"}
-              </TableCell>
+    <main className="flex h-full w-screen flex-col items-center gap-5 overflow-clip p-1 md:w-full md:p-6">
+      <Tabs defaultValue="account">
+        <TabsList>
+          <TabsTrigger value="aktive">Aktive</TabsTrigger>
+          <TabsTrigger value="inaktive">Inaktive</TabsTrigger>
+        </TabsList>
+      </Tabs>
+      <Card className="w-full max-w-120 p-2">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Team</TableHead>
+              <TableHead className="text-right">Opptak</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {DataTeam.map((t) => (
+              <TableRow key={t.id}>
+                <TableCell>{t.team}</TableCell>
+                <TableCell className="text-right">
+                  {t.opptak ? "Åpent" : "Stengt"}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
     </main>
   );
 }
