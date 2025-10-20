@@ -141,7 +141,7 @@ const mainLinks = [
       },
       {
         title: "Tidligere Assistenter",
-        url: href("/dashboard/tidligereassistenter"),
+        url: href("/dashboard/tidligere-assistenter"),
       },
       {
         title: "Intervjufordeling",
@@ -398,7 +398,7 @@ function Breadcrumbs() {
             to={`/${fullPath}`}
             className={cn(
               isEnd ? "text-black" : "text-gray-500",
-              "hover:text-black",
+              "hover:text-black"
             )}
             prefetch="intent"
           >

@@ -1,4 +1,5 @@
 import { DataTable } from "@/components/data-table";
+import RoutingTabs from "@/components/routing-tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataSokere } from "../mock/api/data-sokere";
@@ -71,6 +72,7 @@ export const columns: Array<ColumnDef<Soker>> = [
 export default function Sokere() {
   return (
     <main className="flex h-full w-screen flex-col items-center justify-center gap-5 overflow-clip p-1 md:w-full md:p-6">
+      <RoutingTabs defaultValue="sokere" />
       {/* <Tabs defaultValue="account" className="w-[400px]">
         <TabsList>
           <TabsTrigger value="sokere">Søkere</TabsTrigger>
