@@ -39,7 +39,7 @@ export const columns: Array<ColumnDef<Soker>> = [
   },
   {
     accessorKey: "name",
-    header: "Navn",
+    header: "Skole",
   },
   {
     accessorKey: "tlf",
