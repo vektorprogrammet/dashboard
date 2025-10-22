@@ -1,5 +1,5 @@
 import { DataTable } from "@/components/data-table";
-import RoutingTabs from "@/components/routing-tabs";
+import { RoutingTabs } from "@/components/routing-tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataSokere } from "../mock/api/data-sokere";

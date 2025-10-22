@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import * as React from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 
 type TabItem = {
@@ -11,15 +11,15 @@ type TabItem = {
 };
 
 type RoutingTabsProps = {
-  tabs?: TabItem[];
+  tabs?: Array<TabItem>;
   defaultValue?: string;
 };
 
 // Provide an array of { label, to } and the component will navigate when a tab is selected.
-export default function RoutingTabs({ tabs, defaultValue }: RoutingTabsProps) {
+export function RoutingTabs({ tabs, defaultValue }: RoutingTabsProps) {
   const navigate = useNavigate();
 
-  const defaultTabs: TabItem[] = React.useMemo(
+  const defaultTabs: Array<TabItem> = React.useMemo(
     () => [
       { label: "Søkere", to: "dashboard/sokere", value: "sokere" },
       {
@@ -34,7 +34,7 @@ export default function RoutingTabs({ tabs, defaultValue }: RoutingTabsProps) {
       },
       { label: "Intervjuer", to: "dashboard/intervjuer", value: "intervjuer" },
     ],
-    []
+    [],
   );
 
   const items = tabs ?? defaultTabs;
@@ -47,7 +47,7 @@ export default function RoutingTabs({ tabs, defaultValue }: RoutingTabsProps) {
   return (
     <Tabs
       value={defaultValue}
-      className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mb-6"
+      className="mb-6 w-full max-w-7xl px-4 sm:px-6 lg:px-8"
       onValueChange={handleTabChange}
     >
       <div className="flex justify-center">
