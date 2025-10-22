@@ -333,7 +333,13 @@ function StatusMenu({
   status: Array<string>;
   icon: ReactNode;
 }) {
-  const [activeStatus, setActiveStatus] = useState(status[0]);
+
+  const currentPlace = document.cookie.split("; ")
+	.find(x => x.startsWith("currentPlace="))
+	?.split("=")[1] ?? "Trondheim";
+
+  
+  const [activeStatus, setActiveStatus] = useState(currentPlace);
   const isMobile = useSidebar();
 
   return (
@@ -365,10 +371,13 @@ function StatusMenu({
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               {label}
             </DropdownMenuLabel>
-            {status.map((status) => (
+            {status.map(status => (
               <DropdownMenuItem
                 key={status}
-                onClick={() => setActiveStatus(status)}
+                onClick={() => {
+						document.cookie = `currentPlace=${status}`;
+					 	setActiveStatus(status);
+					 }}
                 className="gap-2 p-2"
               >
                 {status}
