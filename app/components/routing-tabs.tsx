@@ -53,7 +53,11 @@ export default function RoutingTabs({ tabs, defaultValue }: RoutingTabsProps) {
       <div className="flex justify-center">
         <TabsList className="my-5 flex flex-wrap justify-center">
           {items.map((tab) => (
-            <TabsTrigger key={tab.to} value={tab.value ?? tab.to}>
+            <TabsTrigger
+              key={tab.to}
+              value={tab.value ?? tab.to}
+              className="hover:text-black"
+            >
               {tab.label}
             </TabsTrigger>
           ))}
