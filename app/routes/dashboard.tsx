@@ -333,12 +333,20 @@ function StatusMenu({
   status: Array<string>;
   icon: ReactNode;
 }) {
+<<<<<<< HEAD
 
   const currentPlace = document.cookie.split("; ")
 	.find(x => x.startsWith("currentPlace="))
 	?.split("=")[1] ?? "Trondheim";
 
   
+=======
+  const currentPlace =
+    document.cookie
+      .split("; ")
+      .find((x) => x.startsWith("currentPlace="))
+      ?.split("=")[1] ?? "Trondheim";
+>>>>>>> 9479704 (vf-181 remember location via cookies)
   const [activeStatus, setActiveStatus] = useState(currentPlace);
   const isMobile = useSidebar();
 
@@ -375,9 +383,15 @@ function StatusMenu({
               <DropdownMenuItem
                 key={status}
                 onClick={() => {
+<<<<<<< HEAD
 						document.cookie = `currentPlace=${status}`;
 					 	setActiveStatus(status);
 					 }}
+=======
+                  document.cookie = `currentPlace=${status}`;
+                  setActiveStatus(status);
+                }}
+>>>>>>> 9479704 (vf-181 remember location via cookies)
                 className="gap-2 p-2"
               >
                 {status}
