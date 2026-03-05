@@ -1,7 +1,4 @@
-export interface HasId{
-    id: string;
-}
-export interface PersonCore extends HasId{
+export interface PersonCore{
     firstName: string;
     lastName: string;
 }
