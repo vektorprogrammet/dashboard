@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ColumnDef } from "@tanstack/react-table";
 import { getActiveUsers, getInactiveUsers } from "../mock/api/data-brukere";
 
-export type user = {
+export type User = {
   firstName: string;
   lastName: string;
   phone: string;
@@ -14,7 +14,7 @@ export type user = {
   place: string;
   status: string;
 };
-export const columns: Array<ColumnDef<user>> = [
+export const columns: Array<ColumnDef<User>> = [
   {
     id: "select",
     header: ({ table }) => (
