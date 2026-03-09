@@ -29,8 +29,6 @@
       "@/lib/*": ["./app/lib/*"],
       "@/ui/*": ["./app/components/ui/*"],
       "@/types/*": ["./app/types/*"]
-      
-
     },
     "rootDirs": [".", "./.react-router/types"],
 
