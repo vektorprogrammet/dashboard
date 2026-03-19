@@ -1,6 +1,5 @@
 type User = {
-  firstName: string;
-  lastName: string;
+  name: string;
   phone: string;
   mail: string;
   major: string;
@@ -11,8 +10,7 @@ type User = {
 export function getActiveUsers(): Array<User> {
   return [
     {
-      firstName: "Ola",
-      lastName: "Nordmann",
+      name: "Ola Nordmann",
       phone: " 98767849",
       mail: "ola.nordmann@kommune.no",
       major: "MTFYMA",
@@ -20,8 +18,7 @@ export function getActiveUsers(): Array<User> {
       status: "aktiv",
     },
     {
-      firstName: "Kari",
-      lastName: "Nordmann",
+      name: "Kari Nordmann",
       phone: " 98767749",
       mail: "kari.nordmann@kommune.no",
       major: "MTFYMA",
@@ -29,8 +26,7 @@ export function getActiveUsers(): Array<User> {
       status: "aktiv",
     },
     {
-      firstName: "Trond",
-      lastName: "Nordmann",
+      name: "Trond Nordmann",
       phone: " 98766849",
       mail: "Trond.nordmann@kommune.no",
       major: "MTFYMA",
@@ -43,8 +39,7 @@ export function getActiveUsers(): Array<User> {
 export function getInactiveUsers(): Array<User> {
   return [
     {
-      firstName: "Heidi",
-      lastName: "Nordmann",
+      name: "Heidi Nordmann",
       phone: " 98786849",
       mail: "Heidi.nordmann@kommune.no",
       major: "MTFYMA",
@@ -52,8 +47,7 @@ export function getInactiveUsers(): Array<User> {
       status: "inaktiv",
     },
     {
-      firstName: "Truls",
-      lastName: "Nordmann",
+      name: "Truls Nordmann",
       phone: " 9874849",
       mail: "Truls.nordmann@kommune.no",
       major: "MTKJ",
@@ -61,8 +55,7 @@ export function getInactiveUsers(): Array<User> {
       status: "inaktiv",
     },
     {
-      firstName: "Oda",
-      lastName: "Nordmann",
+      name: "Oda Nordmann",
       phone: " 9874649",
       mail: "Oda.nordmann@kommune.no",
       major: "MTING",

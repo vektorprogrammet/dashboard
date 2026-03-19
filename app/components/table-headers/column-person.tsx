@@ -4,11 +4,11 @@ export const columnPerson = [
     header: "Navn",
   },
   {
-    accessorKey: "tlf",
+    accessorKey: "phone",
     header: "Telefon",
   },
   {
-    accessorKey: "email",
+    accessorKey: "mail",
     header: "E-post",
   },
 ];
