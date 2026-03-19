@@ -1,4 +1,4 @@
-export const TableColumnPerson: Array = [
+export const columnPerson = [
   {
     accessorKey: "name",
     header: "Navn",

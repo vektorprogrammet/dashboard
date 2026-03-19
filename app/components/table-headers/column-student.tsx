@@ -1,4 +1,4 @@
-export const TableColumnStudent = [
+export const columnPerson = [
   {
     accessorKey: "school",
     header: "Skole",

@@ -3,6 +3,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { DataSokere } from "../mock/api/data-sokere";
 import { TableColumnHeader } from "@/components/table-column-header";
 import { TableColumnPerson } from "@/components/table-column-person";
+import { headerSokere } from "@/components/table-headers/header-sokere";
 
 export type Soker = {
   id: string;
@@ -15,14 +16,7 @@ export type Soker = {
   assigned: string;
 };
 
-export const columns: Array<ColumnDef<Soker>> = [
-  TableColumnHeader,
-  ...TableColumnPerson,
-  {
-    accessorKey: "assigned",
-    header: "Tildelt",
-  },
-];
+export const columns: Array<ColumnDef<Soker>> = headerSokere;
 
 // biome-ignore lint/style/noDefaultExport: Route Modules require default export https://reactrouter.com/start/framework/route-module
 export default function Sokere() {

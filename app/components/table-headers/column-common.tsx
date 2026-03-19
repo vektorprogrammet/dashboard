@@ -1,6 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 
-export const TableColumnHeader = {
+export const columnCommon = {
  id: "select",
  header: ({ table }) => (
 	 <Checkbox
