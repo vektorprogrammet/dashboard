@@ -7,5 +7,5 @@ export const headerSokere = [
   {
     accessorKey: "assigned",
     header: "Tildelt",
-  },  
+  },
 ];

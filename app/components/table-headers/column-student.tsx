@@ -11,4 +11,4 @@ export const columnPerson = [
     accessorKey: "year",
     header: "År",
   },
-]
+];

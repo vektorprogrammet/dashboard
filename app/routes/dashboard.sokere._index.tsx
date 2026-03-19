@@ -1,9 +1,7 @@
 import { DataTable } from "@/components/data-table";
+import { headerSokere } from "@/components/table-headers/header-sokere";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataSokere } from "../mock/api/data-sokere";
-import { TableColumnHeader } from "@/components/table-column-header";
-import { TableColumnPerson } from "@/components/table-column-person";
-import { headerSokere } from "@/components/table-headers/header-sokere";
 
 export type Soker = {
   id: string;
