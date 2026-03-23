@@ -1,49 +1,19 @@
 // biome-ignore lint/style/noDefaultExport: Route Modules require default export https://reactrouter.com/start/framework/route-module
 import { DataTable } from "@/components/data-table";
-import { Checkbox } from "@/components/ui/checkbox";
+import { headerBrukere } from "@/components/table-headers/header-brukere";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ColumnDef } from "@tanstack/react-table";
 import { getActiveUsers, getInactiveUsers } from "../mock/api/data-brukere";
 
 export type User = {
-  firstName: string;
-  lastName: string;
+  name: string;
   phone: string;
   mail: string;
   major: string;
   place: string;
   status: string;
 };
-export const columns: Array<ColumnDef<User>> = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  { id: "Fornavn", accessorKey: "firstName", header: "Fornavn" },
-  { id: "Etternavn", accessorKey: "lastName", header: "Etternavn" },
-  { id: "Telefon", accessorKey: "phone", header: "Telefon" },
-  { id: "E-post", accessorKey: "mail", header: "E-post" },
-  { id: "Studie", accessorKey: "major", header: "Studie" },
-  { id: "Avdeling", accessorKey: "place", header: "Avdeling" },
-];
+export const columns: Array<ColumnDef<User>> = headerBrukere;
 export default function Brukere() {
   const activeUsers = getActiveUsers();
   const inActiveUsers = getInactiveUsers();
