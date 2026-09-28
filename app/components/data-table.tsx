@@ -32,11 +32,13 @@ import { DataTablePagination } from "./data-table-pagination";
 interface DataTableProps<Data, Value> {
   columns: Array<ColumnDef<Data, Value>>;
   data: Array<Data>;
+  striped?: boolean;
 }
 
 export function DataTable<Data, Value>({
   columns,
   data,
+  striped,
 }: DataTableProps<Data, Value>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -117,12 +119,13 @@ export function DataTable<Data, Value>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="[&_tr:nth-child(odd)]:bg-muted/80">
             {table.getRowModel().rows?.length > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className={striped ? "even:bg-muted" : undefined}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
