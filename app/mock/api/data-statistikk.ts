@@ -4,7 +4,13 @@ type BarChartDataItem = {
   count: number;
 };
 
-export function getApplicantData(): BarChartDataItem[] {
+type ChartDataItem = {
+  id: string;
+  label: string;
+  count: number;
+};
+
+export function getApplicantData(): ChartDataItem[] {
   return [
     { id: "applicants", label: "Tatt opp", count: 104 },
     { id: "new", label: "Nye søkere", count: 100 },
@@ -14,7 +20,7 @@ export function getApplicantData(): BarChartDataItem[] {
 
 export function getGenderStatistics(): BarChartDataItem[] {
   return [
-    { id: "male", label: "Menn", count: 40 },
+    { id: "male", label: "Menn", count: 44 },
     { id: "female", label: "Kvinner", count: 50 },
     { id: "other", label: "Annet", count: 5 },
     { id: "unknown", label: "Ikke oppgitt", count: 5 },

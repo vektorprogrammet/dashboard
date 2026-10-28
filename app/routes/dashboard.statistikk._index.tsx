@@ -141,7 +141,7 @@ export default function Statistikk() {
             title="Hvordan hørte de om oss?"
             description="Andel søkere · Flere svar mulig"
             data={discoveryData}
-            percentageBase={discoveryData.length}
+            percentageBase={applicantCount}
             className="min-w-0"
           />
         </div>
@@ -149,7 +149,7 @@ export default function Statistikk() {
           title="Studieretning"
           description="Fordeling av søkere per studieretning"
           data={studyData}
-          percentageBase={studyData.length}
+          percentageBase={applicantCount}
           className="min-w-0 lg:col-span-2"
           order="desc"
         />
