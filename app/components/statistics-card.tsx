@@ -7,7 +7,7 @@ export function StatisticsCard(title: string, data: string) {
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        <p className="text-2xl font-bold">{data}</p>
+        <p className="font-bold text-2xl">{data}</p>
       </CardContent>
     </Card>
   );

@@ -40,7 +40,7 @@ const barColors = [
 ];
 
 const applicantData = getApplicantData()
-  .map((item, index) => ({
+  .map((item) => ({
     ...item,
   }))
   .filter((item) => item.count > 0);
@@ -128,7 +128,7 @@ export default function Statistikk() {
           </p>
         </div>
         <div className="space-y-2">
-          <label htmlFor="statistics-period" className="text-sm font-medium">
+          <label htmlFor="statistics-period" className="font-medium text-sm">
             Opptaksperiode
           </label>
           <Select value={selectedPeriod.value} onValueChange={selectPeriod}>
@@ -154,17 +154,11 @@ export default function Statistikk() {
             {StatisticsCard("Søkere", applicantCount.toString())}
             {StatisticsCard(
               "Nye søkere",
-              newApplicantsCount.toString() +
-                " (" +
-                ((newApplicantsCount / applicantCount) * 100).toFixed(1) +
-                " %)",
+              `${newApplicantsCount.toString()} (${((newApplicantsCount / applicantCount) * 100).toFixed(1)} %)`,
             )}
             {StatisticsCard(
               "Tidligere søkere",
-              returningApplicantsCount.toString() +
-                " (" +
-                ((returningApplicantsCount / applicantCount) * 100).toFixed(1) +
-                " %)",
+              `${returningApplicantsCount.toString()} (${((returningApplicantsCount / applicantCount) * 100).toFixed(1)}·%)`,
             )}
           </section>
           <section
@@ -208,9 +202,9 @@ export default function Statistikk() {
               order="desc"
             />
           </section>
-          <section aria-label="Opptaksstatistikk" className="space-y-6 mb-6">
+          <section aria-label="Opptaksstatistikk" className="mb-6 space-y-6">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight">
+              <h2 className="font-bold text-2xl tracking-tight">
                 Opptaksstatistikk
               </h2>
             </div>
@@ -241,7 +235,7 @@ export default function Statistikk() {
           className="rounded-xl border bg-card p-8 text-center"
           aria-live="polite"
         >
-          <h2 className="text-lg font-semibold">
+          <h2 className="font-semibold text-lg">
             Ingen statistikk tilgjengelig for{" "}
             {selectedPeriod.label.toLowerCase()}
           </h2>

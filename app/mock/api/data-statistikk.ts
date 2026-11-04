@@ -10,15 +10,15 @@ type ChartDataItem = {
   count: number;
 };
 
-export function getApplicantData(): ChartDataItem[] {
+export function getApplicantData(): Array<ChartDataItem> {
   return [
     { id: "applicants", label: "Tatt opp", count: 104 },
     { id: "new", label: "Nye søkere", count: 100 },
-    { id: "returning", label: "Tidligere søkere", count: 4 }
+    { id: "returning", label: "Tidligere søkere", count: 4 },
   ];
 }
 
-export function getGenderStatistics(): BarChartDataItem[] {
+export function getGenderStatistics(): Array<BarChartDataItem> {
   return [
     { id: "male", label: "Menn", count: 44 },
     { id: "female", label: "Kvinner", count: 50 },
@@ -27,7 +27,7 @@ export function getGenderStatistics(): BarChartDataItem[] {
   ];
 }
 
-export function getStudyYearData(): BarChartDataItem[] {
+export function getStudyYearData(): Array<BarChartDataItem> {
   return [
     { id: "firstYear", label: "1. år", count: 56 },
     { id: "secondYear", label: "2. år", count: 29 },
@@ -37,7 +37,7 @@ export function getStudyYearData(): BarChartDataItem[] {
   ];
 }
 
-export function getDiscoveryData(): BarChartDataItem[] {
+export function getDiscoveryData(): Array<BarChartDataItem> {
   return [
     { id: "classroom", label: "Blesting", count: 39 },
     { id: "stand", label: "Stand", count: 35 },
@@ -50,7 +50,7 @@ export function getDiscoveryData(): BarChartDataItem[] {
 }
 
 // Illustrative counts for the bar charts, until API data is available.
-export function getStudyData(): BarChartDataItem[] {
+export function getStudyData(): Array<BarChartDataItem> {
   return [
     { id: "other", label: "Annet", count: 9 },
     { id: "bbi", label: "BBI", count: 2 },
@@ -105,19 +105,19 @@ export function getStudyData(): BarChartDataItem[] {
   ];
 }
 
-export function getAdmissionData(): BarChartDataItem[] {
+export function getAdmissionData(): Array<BarChartDataItem> {
   return [
     { id: "admitted", label: "Tatt opp", count: 64 },
     { id: "not_admitted", label: "Ikke tatt opp", count: 14 },
-    { id: "canceled", label: "Kansellerte intervjuer", count: 25 }
+    { id: "canceled", label: "Kansellerte intervjuer", count: 25 },
   ];
 }
 
-export function getAdmissionGenderData(): BarChartDataItem[] {
+export function getAdmissionGenderData(): Array<BarChartDataItem> {
   return [
     { id: "male", label: "Menn", count: 31 },
     { id: "female", label: "Kvinner", count: 33 },
     { id: "other", label: "Annet", count: 1 },
     { id: "unknown", label: "Ikke oppgitt", count: 2 },
-  ]
+  ];
 }

@@ -72,7 +72,8 @@ export function BarChartActive({
     .sort((a, b) => {
       if (order === "desc") {
         return b.value - a.value;
-      } else if (order === "asc") {
+      }
+      if (order === "asc") {
         return a.value - b.value;
       }
       return 0;
