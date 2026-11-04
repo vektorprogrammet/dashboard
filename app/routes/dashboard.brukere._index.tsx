@@ -1,4 +1,3 @@
-// biome-ignore lint/style/noDefaultExport: Route Modules require default export https://reactrouter.com/start/framework/route-module
 import { DataTable } from "@/components/data-table";
 import { headerBrukere } from "@/components/table-headers/header-brukere";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,6 +13,7 @@ export type User = {
   status: string;
 };
 export const columns: Array<ColumnDef<User>> = headerBrukere;
+// biome-ignore lint/style/noDefaultExport: Route Modules require default export https://reactrouter.com/start/framework/route-module
 export default function Brukere() {
   const activeUsers = getActiveUsers();
   const inActiveUsers = getInactiveUsers();
